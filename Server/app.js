@@ -4,6 +4,7 @@ import  cookieParser from 'cookie-parser';
 import express from 'express';
 import morgan from 'morgan';
 import  userRoutes from './router/user.routes.js';
+import paymentRoutes from './router/payment.routes.js'
 import courseRoutes from './router/course.route.js'
 import connectionToDB from './config/dbConnection.js';
 import errorMiddleware from './middleware/error.middleware.js';
@@ -25,6 +26,7 @@ app.use('/ping',(req, res)=>{
 // routes 3 define
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/course',courseRoutes);
+app.use("./api/v1/payments", paymentRoutes)
 
 
 

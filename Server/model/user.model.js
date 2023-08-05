@@ -43,7 +43,11 @@ const userSchema= new Schema({
 
    },
    resetPasswordToken:String,
-   forgetPasswordExpiry:Date
+   forgetPasswordExpiry:Date,
+   subscription:{
+    id:String,
+    status:String,
+   }
 },  
 {
     timestamps:true
@@ -65,9 +69,9 @@ userSchema.methods={
              role:this.role,
             },
              process.env.JWT_SECRET,
-            //  {
-            //    expiresIN:'24h'
-            //   }       
+             {
+               expiresIN:'24h'
+              }       
         )
     },
     comparePassword: async function(plainTextPassword){
