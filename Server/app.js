@@ -12,25 +12,29 @@ connectionToDB();
 const app= express();
 config();
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 app.use(morgan('dev'));
-app.use(cors({
+ app.use(cors({
     origin:[process.env.FRONTED_URL],
     Credential:true,
-}))
+ }))
+
+
 app.use(cookieParser());
 app.use('/ping',(req, res)=>{
     res.send('I am listen server')
 })
 // routes 3 define
 app.use('/api/v1/user',userRoutes);
-app.use('/api/v1/course',courseRoutes);
+app.use('/api/v1/courses',courseRoutes);
 app.use("./api/v1/payments", paymentRoutes)
 
 
 
 app.all('*',(req,res)=>{
+
     res.status(400).send('OOPS! 404 page not found')
 })
 app.use(errorMiddleware);
