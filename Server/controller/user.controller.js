@@ -11,8 +11,8 @@ const cookieoption={
   secure:true
 }
 const register =async(req, res, next)=>{
-  res.header('Access-Control-Allow-Credentials', 'true');
-     const {fullName, email, password}=req.body;
+
+     const {fullName, email, password, avatar}=req.body;
      if(!fullName || !email ||!password){
       return next (new AppError("All field are required", 400));
      }
