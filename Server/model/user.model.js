@@ -69,9 +69,9 @@ userSchema.methods={
              role:this.role,
             },
              process.env.JWT_SECRET,
-             {
-               expiresIN:'24h'
-              }       
+            //  {
+            //    expiresIN:process.env.EXPIRY
+            //   }       
         )
     },
     comparePassword: async function(plainTextPassword){

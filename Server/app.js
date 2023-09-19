@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended:true}));
 app.use(morgan('dev'));
 app.use(cors({
     origin:[process.env.FRONTED_URL],
-    Credential:true
+    Credential:true,
 }))
 app.use(cookieParser());
 app.use('/ping',(req, res)=>{

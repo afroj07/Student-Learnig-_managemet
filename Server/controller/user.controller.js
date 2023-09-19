@@ -4,12 +4,14 @@ import cloudinary from 'cloudinary';
 import fs from 'fs/promises';
 import sendEmail from "../utils/sendEmail.js";
 
+
 const cookieoption={
   maxAge:7*24*60*60*1000, //7days
   httpOnly:true,
   secure:true
 }
 const register =async(req, res, next)=>{
+  res.header('Access-Control-Allow-Credentials', 'true');
      const {fullName, email, password}=req.body;
      if(!fullName || !email ||!password){
       return next (new AppError("All field are required", 400));
@@ -52,7 +54,7 @@ const register =async(req, res, next)=>{
           user.avatar.secure_url= result.secure_url;
 
           // remove file from server
-          //fs.rm(`uploads/${req.file.filename}`)
+          fs.rm(`uploads/${req.file.filename}`)
         }
       } catch (e) {
         return next(new AppError(error || 'File not uploaded, please try again', 500));
@@ -134,9 +136,9 @@ message:'User logged out successfully '
       const user = await User.findOne({email});
       if(!user){
         return next(new AppError('Email is not register',400))
-      }
+      }word
 
-      const resetToken = await user.generatePasswordResetToken();
+      const resetToken = await user.generatePassResetToken();
   await user.save();
   const resetPasswordURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
  const subject='Reset Password'
